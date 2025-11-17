@@ -1,20 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { useFonts, Schoolbell_400Regular } from '@expo-google-fonts/schoolbell';
+import { RootSiblingParent } from 'react-native-root-siblings';
+
+import FlashcardSwiper from './src/components/FlashcardSwiper';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Schoolbell_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <View style={[styles.container, styles.loader]} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RootSiblingParent>
+      <View style={styles.container}>
+        <StatusBar style="dark" />
+        <FlashcardSwiper />
+      </View>
+    </RootSiblingParent>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#F0FBFF',
+  },
+  loader: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
